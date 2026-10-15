@@ -28,19 +28,6 @@ This project qualifies as **Path B** because it implements:
 | 3 | Khushi Solanki | 8025064118 |
 | 4 | Sumit Khapre | 8022055725 |
 
-### Marks Mapping (Total 50)
-
-- Attendance (10) — lab work over final 4 weeks, mandatory attendance
-- Project Work and Viva (30) — demo scenarios in §8 + agentic trace in UI
-- Practical file + project report (10) — this README serves as base for report; see §6 structure, §7 setup, §10 APIs
-
-### 4-Week Lab Plan
-
-- Week 1: Setup (§7 Steps 1-3), Pinecone + Tavily keys, run sample ingestion
-- Week 2: Agentic workflow (§4) + chat API + UI trace verification
-- Week 3: Document upload (`POST /api/ingest` + `X-Admin-Key`), audit DB, demo A-E
-- Week 4: Viva prep, report writing, video/demo rehearsal
-
 ---
 
 ## 1. Business Problem
