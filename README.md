@@ -257,7 +257,8 @@ AgenticAi_project/
 ├── .env                        
 ├── Dockerfile
 ├── ingest_sample_kb.py
-├── requirements.txt              
+├── pyproject.toml              # uv project configuration and dependencies
+├── uv.lock                     # Reproducible uv dependency lockfile
 ├── run.py                        # Uvicorn entrypoint, port 8080
 └── README.md
 ```
@@ -266,33 +267,42 @@ AgenticAi_project/
 
 ## 7. Setup
 
-> Python requirement: **3.11**. `langchain-pinecone==0.2.13` has no wheel for Python 3.14, so create the venv with Python 3.11 (matches `Dockerfile: python:3.11-slim`).
+> Python requirement: **3.11**. uv uses the version in `.python-version`, matching `Dockerfile: python:3.11-slim`.
 
-### Step 1 — Create virtual environment (Python 3.11)
-
-```bash
-python3.11 -m venv venv
-```
-
-Windows:
+### Step 1 — Install uv
 
 ```bash
-venv\Scripts\activate
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-macOS/Linux:
+Restart the terminal after installation, or reload your shell configuration.
+
+### Step 2 — Create the environment and install dependencies
 
 ```bash
-source venv/bin/activate
+uv sync
 ```
 
-### Step 2 — Install dependencies
+uv reads `.python-version`, creates `.venv` with Python 3.11, installs the dependencies from `pyproject.toml`, and creates or updates `uv.lock`.
+
+### Step 3 — Activate the environment (optional)
+
+You can run commands through uv without activating the environment:
 
 ```bash
-pip install -r requirements.txt
+uv run python run.py
 ```
 
-### Step 3 — Configure environment
+To activate it for a normal shell:
+
+```bash
+source .venv/bin/activate
+python run.py
+```
+
+On Windows, use `.venv\Scripts\activate`.
+
+### Step 4 — Configure environment
 
 Create a `.env` file in the project root directory (no `.env.example` is shipped). Working config for this AI project:
 
@@ -328,7 +338,7 @@ APP_ENV=development
 ### Step 5 — Run the application
 
 ```bash
-python run.py
+uv run python run.py
 ```
 
 Open:
