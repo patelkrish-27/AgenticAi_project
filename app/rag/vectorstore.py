@@ -53,9 +53,9 @@ def get_embeddings():
             "model": settings.embedding_model,
             "openai_api_key": settings.openai_api_key,
         }
-        base_url = settings.effective_openai_base_url
+        base_url = settings.openai_base_url.strip().rstrip("/")
         if base_url:
-            kwargs["openai_api_base"] = base_url
+            kwargs["base_url"] = base_url
         _embeddings = OpenAIEmbeddings(**kwargs)
     return _embeddings
 

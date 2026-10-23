@@ -9,7 +9,6 @@ class Settings(BaseSettings):
     app_env: str = "development"
     openai_api_key: str = ""
     openai_base_url: str = ""
-    openai_api_base: str = ""
     tavily_api_key: str = ""
     pinecone_api_key: str = ""
     pinecone_index_name: str = "fde-it-support-rag"
@@ -24,13 +23,6 @@ class Settings(BaseSettings):
     sample_kb_dir: str = str(BASE_DIR / "data" / "sample_kb")
 
     model_config = SettingsConfigDict(env_file=str(BASE_DIR / ".env"), extra="ignore")
-
-    @property
-    def effective_openai_base_url(self) -> str:
-        # Support both OPENAI_BASE_URL (new SDK) and OPENAI_API_BASE (langchain)
-        base = (self.openai_base_url or self.openai_api_base or "").strip()
-        # Normalize: strip trailing slash, but keep /v1 if user provided it
-        return base.rstrip("/") if base else ""
 
 
 

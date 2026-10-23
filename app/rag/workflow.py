@@ -23,10 +23,9 @@ def llm():
             "temperature": 0,
             "openai_api_key": settings.openai_api_key,
         }
-        base_url = settings.effective_openai_base_url
+        base_url = settings.openai_base_url.strip().rstrip("/")
         if base_url:
-            # ChatOpenAI uses openai_api_base (alias base_url in newer versions)
-            kwargs["openai_api_base"] = base_url
+            kwargs["base_url"] = base_url
         _llm = ChatOpenAI(**kwargs)
     return _llm
 
